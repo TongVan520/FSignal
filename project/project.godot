@@ -12,4 +12,17 @@ config_version=5
 
 config/name="FSignal"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://asset/icon/icon.svg"
+
+[editor]
+
+naming/scene_name_casing=1
+naming/script_name_casing=1
+
+[file_customization]
+
+folder_colors={
+"res://asset/": "blue",
+"res://source/": "yellow",
+"res://tool/": "purple"
+}

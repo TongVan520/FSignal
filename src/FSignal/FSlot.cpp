@@ -2,10 +2,10 @@
 // Created by FireFlower on 2024/11/23.
 //
 
-#include "FSignal.h"
+#include "FSlot.h"
 
 namespace fireflower {
-	void FSignal::_bind_methods() {
+	void FSlot::_bind_methods() {
 	
 	}
 }

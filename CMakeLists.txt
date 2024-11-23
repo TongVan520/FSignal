@@ -14,5 +14,7 @@ add_library(FSignal SHARED
         src/FSignal/FSignal.h
         src/register_types.cpp
         src/register_types.h
+        src/FSignal/FSlot.cpp
+        src/FSignal/FSlot.h
 
 )
