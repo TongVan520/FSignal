@@ -6,20 +6,147 @@
 #define FSIGNAL_FSIGNAL_H
 
 #include <godot_cpp/classes/ref_counted.hpp>
+#include <godot_cpp/variant/typed_array.hpp>
+#include <list>
 
-#define FRegisterFSignal GDREGISTER_CLASS(fireflower::FSignal)
+#include "FSlot.h"
+
+
+#define FRegisterFSignal \
+GDREGISTER_CLASS(fireflower::FSignal0) \
+GDREGISTER_CLASS(fireflower::FSignal1) \
+GDREGISTER_CLASS(fireflower::FConnectOption) \
+
+
+using godot::RefCounted, godot::Ref, godot::TypedArray;
+using std::list, std::pair;
+
+/// 枚举<code>FConnectOption::FConnectOptionEnum</code>
+namespace fireflower {
+	class FConnectOption : public RefCounted {
+	GDCLASS(FConnectOption, RefCounted);
+	
+	public:
+		/// @类名 连接选项枚举
+		enum FConnectOptionEnum {
+			/// @名称 默认
+			Default = 0b0,
+			
+			/// @名称 一次性
+			/// @描述 当槽被调用一次后自动与其断开连接
+			Disposable = 0b1,
+			
+			/// @名称 唯一
+			/// @描述 确保相同的槽最多只能被连接一次
+			Unique = 0b10,
+		};
+	
+	protected:
+		static void _bind_methods() {
+			BIND_ENUM_CONSTANT(Default);
+			BIND_ENUM_CONSTANT(Disposable);
+			BIND_ENUM_CONSTANT(Unique);
+		}
+	};
+}
+VARIANT_ENUM_CAST(fireflower::FConnectOption::FConnectOptionEnum);
 
 namespace fireflower {
-	using namespace godot;
+	/// @类名 信号（无参）
+	/// @描述 参数数量为<code>0</code>的信号
+	class FSignal0 : public RefCounted {
+	GDCLASS(FSignal0, RefCounted);
 	
-	/// @类名 信号
-	/// @描述 线程安全
-	class FSignal : public RefCounted {
-	GDCLASS(FSignal, RefCounted);
+	private:
+		using DataType = list <pair<Ref<FSlot0>, bool>>;
+		
+		/// @名称 槽列表
+		/// @描述 列表中存储的是<i>槽</i>和<i>是否为一次性槽标志</i>的二元元组
+		DataType slotPairList;
+	
+	private:
+		DataType::const_iterator findSlot(Ref<FSlot0> slot, bool is_reverse = false) const;
+	
+	public:
+		/// @名称 连接
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		/// @参数名称 <code>option</code>
+		/// @参数描述 连接选项枚举
+		void connect(
+			Ref<FSlot0> slot,
+			FConnectOption::FConnectOptionEnum option = FConnectOption::FConnectOptionEnum::Default
+		);
+		
+		/// @名称 断开连接
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		void disconnect(Ref<FSlot0> slot);
+		
+		/// @名称 判断是否已连接指定槽
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		/// @返回值 是否已连接
+		bool isConnected(Ref<FSlot0> slot);
+		
+		/// @名称 触发
+		void emit();
+		
+		/// @名称 获取已连接的槽
+		/// @返回值 已连接的槽组成的数组
+		TypedArray<FSlot0> getConnectedSlots() const;
 	
 	protected:
 		static void _bind_methods();
+		
+	};
 	
+	/// @类名 信号（单参）
+	/// @描述 参数数量为<code>1</code>的信号
+	class FSignal1 : public RefCounted {
+	GDCLASS(FSignal1, RefCounted);
+	private:
+		using DataType = list <pair<Ref<FSlot1>, bool>>;
+		
+		/// @名称 槽列表
+		/// @描述 列表中存储的是<i>槽</i>和<i>是否为一次性槽标志</i>的二元元组
+		DataType slotPairList;
+	
+	private:
+		DataType::const_iterator findSlot(Ref<FSlot1> slot, bool is_reverse = false) const;
+	
+	public:
+		/// @名称 连接
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		/// @参数名称 <code>option</code>
+		/// @参数描述 连接选项枚举
+		void connect(
+			Ref<FSlot1> slot,
+			FConnectOption::FConnectOptionEnum option = FConnectOption::FConnectOptionEnum::Default
+		);
+		
+		/// @名称 断开连接
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		void disconnect(Ref<FSlot1> slot);
+		
+		/// @名称 判断是否已连接指定槽
+		/// @参数名称 <code>slot</code>
+		/// @参数描述 槽
+		/// @返回值 是否已连接
+		bool isConnected(Ref<FSlot1> slot);
+		
+		/// @名称 触发
+		void emit(const Variant& arg);
+		
+		/// @名称 获取已连接的槽
+		/// @返回值 已连接的槽组成的数组
+		TypedArray<FSlot1> getConnectedSlots() const;
+		
+	protected:
+		static void _bind_methods();
+		
 	};
 }
 
