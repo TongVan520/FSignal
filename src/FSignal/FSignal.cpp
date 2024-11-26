@@ -45,7 +45,7 @@ namespace fireflower {
 		}
 	}
 	
-	bool FSignal0::isConnected(Ref<FSlot0> slot) {
+	bool FSignal0::isConnected(Ref<FSlot0> slot) const {
 		return this->findSlot(slot, true) != this->slotPairList.end();
 	}
 	
@@ -133,7 +133,7 @@ namespace fireflower {
 		}
 	}
 	
-	bool FSignal1::isConnected(Ref<FSlot1> slot) {
+	bool FSignal1::isConnected(Ref<FSlot1> slot) const {
 		return this->findSlot(slot, true) != this->slotPairList.end();
 	}
 	

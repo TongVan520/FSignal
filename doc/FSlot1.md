@@ -3,6 +3,9 @@
 
 与此类对应的[信号类型](FSignal1.md)
 
+## 父类
+`RefCounted`
+
 ## 函数
 
 ### bind

@@ -8,6 +8,12 @@
 
 不同值之间可以相互组合成新的值。
 
+|枚举|值|
+|:-|:-:|
+|[Default](#default)|0|
+|[Disposable](#disposable)|1|
+|[Unique](#unique)|2|
+
 #### Default
 默认
 

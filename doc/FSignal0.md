@@ -32,7 +32,7 @@ void disconnect(slot: FSlot0)
 
 ### isConnected
 ```gdscript
-bool isConnected(slot: FSlot0)
+bool isConnected(slot: FSlot0) const
 ```
 判断是否已连接指定槽
 

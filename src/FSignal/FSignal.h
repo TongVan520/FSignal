@@ -87,7 +87,7 @@ namespace fireflower {
 		/// @参数名称 <code>slot</code>
 		/// @参数描述 槽
 		/// @返回值 是否已连接
-		bool isConnected(Ref<FSlot0> slot);
+		bool isConnected(Ref<FSlot0> slot) const;
 		
 		/// @名称 触发
 		void emit();
@@ -135,7 +135,7 @@ namespace fireflower {
 		/// @参数名称 <code>slot</code>
 		/// @参数描述 槽
 		/// @返回值 是否已连接
-		bool isConnected(Ref<FSlot1> slot);
+		bool isConnected(Ref<FSlot1> slot) const;
 		
 		/// @名称 触发
 		void emit(const Variant& arg);
