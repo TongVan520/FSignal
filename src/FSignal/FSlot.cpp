@@ -6,6 +6,7 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 
 using namespace godot;
+using std::shared_lock;
 
 // FSlot0
 namespace fireflower {
@@ -33,6 +34,7 @@ namespace fireflower {
 	}
 	
 	void FSlot0::invoke() const {
+		shared_lock readLock(this->functionShrdmtx);
 		if (this->function) {
 			this->function();
 		}
@@ -90,15 +92,18 @@ namespace fireflower {
 	}
 	
 	void FSlot1::invoke(const Variant& arg) const {
+		shared_lock readLock(this->functionShrdmtx);
 		if (this->function) {
 			this->function(arg);
 		}
 	}
 	
 	Ref<FSlot0> FSlot1::bind(const Variant& arg) const {
+		// 确保自己的生命周期长于新槽的生命周期
+		auto self = Ref(const_cast<FSlot1*>(this));
 		return FSlot0::makeFromLambda(
-			[&]() {
-				this->invoke(arg);
+			[=]() {
+				self->invoke(arg);
 			}
 		);
 	}
