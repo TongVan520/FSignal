@@ -5,16 +5,22 @@
 
 #include "register_types.h"
 
-#include <gdextension_interface.h>
+#include "gdextension_interface.h"
 
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/core/defs.hpp>
-#include <godot_cpp/godot.hpp>
+#include "godot_cpp/core/class_db.hpp"
+#include "godot_cpp/core/defs.hpp"
+#include "godot_cpp/godot.hpp"
 
 #include "FSignal/FSignal.h"
 #include "FSignal/FSlot.h"
 
 using namespace godot;
+
+#ifdef DEBUG_ENABLED
+#define QWQ
+#else
+#define QWQ
+#endif
 
 void initialize_example_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
