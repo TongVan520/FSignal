@@ -3,7 +3,7 @@
 //
 
 #include "FSlot.h"
-#include <godot_cpp/variant/utility_functions.hpp>
+#include "godot_cpp/variant/utility_functions.hpp"
 
 using namespace godot;
 using std::shared_lock;
