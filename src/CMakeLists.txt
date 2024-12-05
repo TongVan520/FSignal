@@ -29,12 +29,18 @@ foreach (file ${head_files})
 endforeach ()
 
 
-find_package(unofficial-godot-cpp CONFIG REQUIRED)
-
 add_library(
         ${PROJECT_NAME} SHARED register_types.cpp
         FSignal/FSlot.cpp
         FSignal/FSignal.cpp
 )
-
+find_package(unofficial-godot-cpp CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE unofficial::godot::cpp)
+
+add_library(
+        ${PROJECT_NAME}-static STATIC register_types.cpp
+        FSignal/FSlot.cpp
+        FSignal/FSignal.cpp
+)
+find_package(unofficial-godot-cpp CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME}-static PRIVATE unofficial::godot::cpp)
