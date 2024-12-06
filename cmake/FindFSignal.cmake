@@ -33,6 +33,7 @@ find_package(unofficial-godot-cpp CONFIG REQUIRED)
 list(APPEND ${PackageName}_DEPENDENT_LIBRARIES unofficial::godot::cpp)
 
 # 为用户配置库的包含目录、库目录以及依赖项（如果有）
+# 动态库
 add_library(${PackageName}::${PackageName} SHARED IMPORTED)
 set_target_properties(
         ${PackageName}::${PackageName} PROPERTIES
@@ -42,11 +43,24 @@ set_target_properties(
         IMPORTED_IMPLIB "${${PackageName}_LIBRARY_DIR}/${PackageName}.lib"
 )
 
+# 静态库
+add_library(${PackageName}::${PackageName}-static STATIC IMPORTED)
+set_target_properties(
+        ${PackageName}::${PackageName}-static PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES "${${PackageName}_INCLUDE_DIR}"
+        INTERFACE_LINK_LIBRARIES "${${PackageName}_DEPENDENT_LIBRARIES}"
+        IMPORTED_LOCATION "${${PackageName}_LIBRARY_DIR}/${PackageName}-static.lib"
+)
+
 # 告知用户库的使用方式
 message(STATUS
         "请添加：\n
-        set(${PackageName}_ROOT <库根目录>)
         find_package(${PackageName} REQUIRED)
+
+        动态库：
         target_link_libraries(\${PROJECT_NAME} PRIVATE ${PackageName}::${PackageName})
+
+        静态库：
+        target_link_libraries(\${PROJECT_NAME} PRIVATE ${PackageName}::${PackageName}-static)
         \n以使用库"
 )

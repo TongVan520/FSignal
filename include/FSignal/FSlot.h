@@ -5,7 +5,8 @@
 #ifndef FSIGNAL_FSLOT_H
 #define FSIGNAL_FSLOT_H
 
-#include "godot_cpp/classes/ref_counted.hpp"
+#include <godot_cpp/classes/ref_counted.hpp>
+
 #include <functional>
 #include <shared_mutex>
 

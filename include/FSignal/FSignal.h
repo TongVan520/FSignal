@@ -5,9 +5,10 @@
 #ifndef FSIGNAL_FSIGNAL_H
 #define FSIGNAL_FSIGNAL_H
 
-#include "godot_cpp/core/defs.hpp"
-#include "godot_cpp/classes/ref_counted.hpp"
-#include "godot_cpp/variant/typed_array.hpp"
+#include <godot_cpp/core/defs.hpp>
+#include <godot_cpp/classes/ref_counted.hpp>
+#include <godot_cpp/variant/typed_array.hpp>
+
 #include <list>
 
 #include "FSlot.h"
@@ -16,7 +17,11 @@
 #define FRegisterFSignal \
 GDREGISTER_CLASS(fireflower::FSignal0) \
 GDREGISTER_CLASS(fireflower::FSignal1) \
-GDREGISTER_CLASS(fireflower::FConnectOption) \
+GDREGISTER_CLASS(fireflower::FConnectOption)
+
+#define FRegisterModule_FSignal \
+FRegisterFSignal;               \
+FRegisterFSlot;
 
 
 using godot::RefCounted, godot::Ref, godot::TypedArray;
@@ -113,7 +118,7 @@ namespace fireflower {
 		/// @名称 获取已连接的槽
 		/// @描述 <b>线程安全</b>，<b>原子操作</b>
 		/// @返回值 已连接的槽组成的数组
-		TypedArray<FSlot0> getConnectedSlots() const;
+		TypedArray <FSlot0> getConnectedSlots() const;
 	
 	protected:
 		static void _bind_methods();
@@ -171,8 +176,8 @@ namespace fireflower {
 		/// @名称 获取已连接的槽
 		/// @描述 <b>线程安全</b>，<b>原子操作</b>
 		/// @返回值 已连接的槽组成的数组
-		TypedArray<FSlot1> getConnectedSlots() const;
-		
+		TypedArray <FSlot1> getConnectedSlots() const;
+	
 	protected:
 		static void _bind_methods();
 		
