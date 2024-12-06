@@ -1,20 +1,7 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.30)
 project(FSignal)
 
-set(CMAKE_CXX_STANDARD 17)
+set(OutputDir ${PROJECT_SOURCE_DIR})
 
-include_directories(
-        godot-cpp/include/
-        godot-cpp/gdextension/
-        godot-cpp/gen/include/
-)
-
-add_library(FSignal SHARED
-        src/FSignal/FSignal.cpp
-        src/FSignal/FSignal.h
-        src/register_types.cpp
-        src/register_types.h
-        src/FSignal/FSlot.cpp
-        src/FSignal/FSlot.h
-
-)
+add_subdirectory(src)
+add_subdirectory(test)
